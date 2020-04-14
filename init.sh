@@ -16,10 +16,12 @@ fi
 
 
 # Setup virtualenv
-echo -e "Initializing virtualenv for ${NAME}.\n"
-virtualenv -p /usr/bin/python3 env &>/dev/null
-env/bin/pip3 install -r requirements.txt &>/dev/null
-echo -e "Finished setting up virtualenv.\n"
+if [ ! -d env ]; then
+  echo -e "Initializing virtualenv for ${NAME}.\n"
+  virtualenv -p /usr/bin/python3 env &>/dev/null
+  env/bin/pip3 install -r requirements.txt &>/dev/null
+  echo -e "Finished setting up virtualenv.\n"
+fi
 
 
 # (Re)Create database if not present.
@@ -34,6 +36,11 @@ fi
 if [ ${DEBUG} = true ]; then
   env/bin/python3 ${NAME}/app.py
 else
+  if [ -f /etc/nginx/sites-enabled/default ]; then
+    sudo rm -rf /etc/nginx/sites-enabled/default
+  fi
   env/bin/python3 helper.py  # replaces IP_ADDR in configs/nginx/flask.conf
+  sudo ln -s configs/nginx/flask.conf /etc/nginx/conf.d/
+  sudo systemctl restart nginx
   env/bin/gunicorn -w $(calc $(nproc --all)*2+1) app:app --chdir ${NAME}
 fi
