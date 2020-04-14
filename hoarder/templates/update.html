@@ -1,0 +1,21 @@
+<!-- 'import' the base html -->
+{% extends 'base.html' %}
+
+<!-- head -->
+{% block head %}
+<title>Hoarder</title>
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<div class='content'>
+  <h2 style='text-align: center'>Update Snippet</h2>
+
+  <form action='/update/{{ snippet.id }}' method='POST'>
+    <input type='text' name='name' id='name', value='{{ snippet.name }}'>
+    <input type='text' name='content' id='content', value='{{ snippet.content }}'>
+    <input type='submit' value='Update'>
+  </form>
+
+</div>
+{% endblock %}

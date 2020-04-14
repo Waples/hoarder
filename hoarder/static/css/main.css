@@ -1,0 +1,50 @@
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h1, h5 {
+  text-align: center;
+}
+
+.content {
+    margin: 0 auto;
+    width: 400px;
+}
+
+table, td, th {
+    border: 1px solid #aaa;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    height: 30px;
+}
+
+td {
+    text-align: center;
+    padding: 5px;
+}
+
+.form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+label, input {
+  display: block;
+}
+
+#content {
+    width: 70%;
+}
+
+.snippet {
+  width: 100px;
+  overflow: hidden;
+}

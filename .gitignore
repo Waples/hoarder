@@ -1,0 +1,8 @@
+#hidden stuffs
+.tests/
+.secrets
+
+#generated stuffs
+env/
+database/
+test/

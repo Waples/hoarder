@@ -1,0 +1,55 @@
+<!-- 'import' the base html -->
+{% extends 'base.html' %}
+
+<!-- head -->
+{% block head %}
+<title>Hoarder</title>
+{% endblock %}
+
+<!-- body -->
+{% block body %}
+<div class='content'>
+  {% if snippets | length < 1 %}
+
+  <h4> There are no snippets in the database. Create one below!</h4>
+
+  {% else %}
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Snippet</th>
+      <th>Added</th>
+      <th>Actions</th>
+    </tr>
+
+    {%- for snippet in snippets %}
+
+    <tr>
+      <td>{{ snippet.name }}</td>
+      <td id='snippet'>{{ snippet.content }}</td>
+      <td>{{ snippet.date_created.date() }}</td>
+      <td>
+        <a href='/delete/{{ snippet.id }}'>Delete</a>
+        <br>
+        <a href='/update/{{ snippet.id }}'>Update</a>
+      </td>
+    </tr>
+
+    {%- endfor %}
+
+  </table>
+
+  {% endif %}
+
+  <form action='/' method='POST'>
+    <label for='name'>Name</label>
+    <input type='text' name='name' id='name'>
+    <label for='content'>Snippet</label>
+    <input type='text' name='content' id='content' width='40em' height='80em'>
+    <input type='submit' value='Add Snippet'>
+  </form>
+
+</div>
+
+{% endblock %}
