@@ -38,4 +38,5 @@ if [ ${DEBUG} = true ]; then
   env/bin/python3 hoarder/app.py
 else
   echo -e "TODO: start gunicorn & nginx and stuffs..."
+  env/bin/python3 hoarder/app.py
 fi

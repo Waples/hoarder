@@ -6,4 +6,5 @@
 env/
 database/
 test/
+**/*.db
 **/__pycache__/
