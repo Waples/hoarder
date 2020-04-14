@@ -26,7 +26,7 @@ echo -e "Finished setting up virtualenv.\n"
 if [ ! -f ${NAME}/snippets.db ]; then
   source env/bin/activate
   echo -e "Creating local database."
-  env/bin/python create_db.py &>/dev/null
+  env/bin/python3 create_db.py &>/dev/null
 fi
 
 
@@ -35,6 +35,6 @@ if [ ${DEBUG} = true ]; then
   echo -e "Starting development server at localhost:5000.\n"
   env/bin/python3 ${NAME}/app.py
 else
-  env/bin/python helper.py  # replaces IP_ADDR in configs/nginx/flask.conf
+  env/bin/python3 helper.py  # replaces IP_ADDR in configs/nginx/flask.conf
   env/bin/gunicorn -w $(calc $(nproc --all)*2+1) app:app --chdir ${NAME}
 fi
