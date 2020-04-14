@@ -1,6 +1,13 @@
 body, html {
     margin: 0;
     font-family: sans-serif;
+    background-color: #3a4660;
+    font-family: 'Oxygen', sans-serif;
+    color: #fff;
+}
+
+a {
+  color: #ffa500;
 }
 
 h1, h5 {
