@@ -8,7 +8,7 @@ echo -e "Building project ${NAME}\n\t${DESCRIPTION}.\n"
 
 
 # Set debug mode (default: False).
-DEBUG=true
+DEBUG=false
 if [ ${DEBUG} = true ]; then
   echo -e "Debug mode is on.\nRemoving existing database if existing.\n"
   if [ -f hoarder/snippets.db ]; then
@@ -38,5 +38,5 @@ if [ ${DEBUG} = true ]; then
   env/bin/python3 hoarder/app.py
 else
   echo -e "TODO: start gunicorn & nginx and stuffs..."
-  env/bin/python3 hoarder/app.py
+  env/bin/python3 hoarder/app.py &>/dev/null
 fi
