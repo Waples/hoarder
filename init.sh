@@ -17,7 +17,7 @@ fi
 
 # Setup virtualenv
 echo -e "Initializing virtualenv for ${NAME}.\n"
-virtualenv env &>/dev/null
+virtualenv -p /usr/bin/python3 env &>/dev/null
 env/bin/pip3 install -r requirements.txt &>/dev/null
 echo -e "Finished setting up virtualenv.\n"
 
