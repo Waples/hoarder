@@ -32,7 +32,6 @@ fi
 
 # if debug, start the development server, else start gunicorn & nginx.
 if [ ${DEBUG} = true ]; then
-  echo -e "Starting development server at localhost:5000.\n"
   env/bin/python3 ${NAME}/app.py
 else
   env/bin/python3 helper.py  # replaces IP_ADDR in configs/nginx/flask.conf
