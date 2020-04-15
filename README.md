@@ -18,5 +18,5 @@ Find out your amount of cores with `nproc --all`.
 
 Little life hack to start gunicorn with correct amount of workers:
 ```bash
-env/bin/gunicorn -w $(calc $(nproc --all)*2+1) app:app --chdir ${NAME}
+env/bin/gunicorn -w $(($(nproc --all)*2+1)) app:app --chdir ${NAME}
 ```

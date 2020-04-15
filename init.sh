@@ -7,6 +7,20 @@ DEBUG=true
 
 echo -e "Building project ${NAME}\n\t${DESCRIPTION}.\n"
 
+# install packages from package.list
+sudo apt update -y && sudo apt upgrade -y
+sudo apt install -y $(awk '{print $1'} package.list)
+
+
+# firewall rules with `ufw` if not allready enabled
+if [[ $(sudo ufw status | grep 'Active') != 1 ]]; then
+  sudo ufw allow ssh
+  sudo ufw allow Nginx-Full
+  sudo ufw enable
+  sudo ufw reload
+fi
+
+
 if [ ${DEBUG} = true ]; then
   echo -e "Debug mode is on.\nRemoving existing database if existing.\n"
   if [ -f ${NAME}/snippets.db ]; then
@@ -39,8 +53,8 @@ else
   if [ -f /etc/nginx/sites-enabled/default ]; then
     sudo rm -rf /etc/nginx/sites-enabled/default
   fi
-  env/bin/python3 helper.py  # replaces IP_ADDR in configs/nginx/flask.conf
+  env/bin/python3 helper.py  # replaces IP_ADDR and CH_HOME in flask.conf
   sudo ln -s configs/nginx/flask.conf /etc/nginx/conf.d/
   sudo systemctl restart nginx
-  env/bin/gunicorn -w $(calc $(nproc --all)*2+1) app:app --chdir ${NAME}
+  env/bin/gunicorn -D -w $(($(nproc --all)*2+1)) app:app --chdir ${NAME}
 fi
