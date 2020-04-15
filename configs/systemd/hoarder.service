@@ -1,0 +1,13 @@
+[Unit]
+Description=gunicorn server for flask apps (running on port 8000)
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory=/home/pi
+ExecStart=/home/pi/hoarder/env/bin/gunicorn -w 9 app:app --chdir /home/pi/hoarder/hoarder/
+Restart=on-failure
+User=pi
+
+[Install]
+WantedBy=multi-user.target

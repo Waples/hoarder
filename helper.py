@@ -9,8 +9,8 @@ try:
             data = f.read()
             f.close()
         with open('configs/nginx/flask.conf', 'w') as f:
+            f.write(data.replace('CH_HOME', project_home))
             f.write(
-                data.replace('CH_HOME', project_home)
                 data.replace('IP_ADDR',
                     r('http://ifconfig.co/json').json()['ip']
                     )

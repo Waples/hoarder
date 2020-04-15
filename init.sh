@@ -15,9 +15,8 @@ sudo apt install -y $(awk '{print $1'} package.list)
 # firewall rules with `ufw` if not allready enabled
 if [[ $(sudo ufw status | grep 'Active') != 1 ]]; then
   sudo ufw allow ssh
-  sudo ufw allow Nginx-Full
+  sudo ufw allow 'Nginx Full'
   sudo ufw enable
-  sudo ufw reload
 fi
 
 
@@ -54,7 +53,8 @@ else
     sudo rm -rf /etc/nginx/sites-enabled/default
   fi
   env/bin/python3 helper.py  # replaces IP_ADDR and CH_HOME in flask.conf
-  sudo ln -s configs/nginx/flask.conf /etc/nginx/conf.d/
-  sudo systemctl restart nginx
+  sudo ln -s configs/nginx/flask.conf /etc/nginx/sites-enabled/
   env/bin/gunicorn -D -w $(($(nproc --all)*2+1)) app:app --chdir ${NAME}
+  sudo systemctl enable nginx
+  sudo systemctl restart nginx
 fi
