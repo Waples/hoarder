@@ -3,7 +3,7 @@ echo -e "Lazy initializer for Flask development.\n"
 
 NAME="hoarder"
 DESCRIPTION="A snippet collector build in Flask."
-DEBUG=true
+DEBUG=false
 
 echo -e "Building project ${NAME}\n\t${DESCRIPTION}.\n"
 

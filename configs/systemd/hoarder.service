@@ -4,10 +4,10 @@ After=network.target
 
 [Service]
 Type=forking
-WorkingDirectory=/home/pi
-ExecStart=/home/pi/hoarder/env/bin/gunicorn -w 9 app:app --chdir /home/pi/hoarder/hoarder/
+WorkingDirectory=/home/florian
+ExecStart=/home/florian/hoarder/env/bin/gunicorn -w 9 app:app --chdir /home/florian/hoarder/hoarder/
 Restart=on-failure
-User=pi
+User=florian
 
 [Install]
 WantedBy=multi-user.target

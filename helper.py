@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Helper module"""
 #pylint: disable=C0103,W0703
-project_home = '/home/pi'
+project_home = '/home/florian'
 try:
     from requests import get as r
     if r('http://ifconfig.co/json').ok:
